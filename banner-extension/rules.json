@@ -1,0 +1,16 @@
+[
+  {
+    "keyword": "meijo-u",
+    "text": "名城大学",
+    "style": {
+      "backgroundColor": "red"
+    }
+  },
+  {
+    "keyword": "meijo-h",
+    "text": "名城高校",
+    "style": {
+      "backgroundColor": "blue"
+    }
+  }
+]
