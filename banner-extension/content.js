@@ -30,6 +30,7 @@
       padding: "6px 0",
       textAlign: "center",
       fontWeight: "bold",
+      pointerEvents: "none",
       zIndex: "999999", // 最前面に表示
       color: "white",
       ...(rule.style || {}),
@@ -41,31 +42,21 @@
     // バナーの高さ分だけページ全体を下にずらす処理
     const pushDown = () => {
       const offset = banner.getBoundingClientRect().height || 32;
-
-      if (!document.body.dataset.originalMarginTop) {
-        document.body.dataset.originalMarginTop = getComputedStyle(
-          document.body,
-        ).marginTop;
-      }
-
-      const baseMargin =
-        parseFloat(document.body.dataset.originalMarginTop) || 0;
-      document.body.style.marginTop = baseMargin + offset + "px";
-
+      document.documentElement.style.paddingTop = offset + "px";
       // header系を全部下げる
-      document
-        .querySelectorAll("header, [role='banner'], .header, #header")
-        .forEach((el) => {
-          const style = getComputedStyle(el);
-          if (style.position === "fixed" || style.position === "sticky") {
-            if (!el.dataset.originalTop) {
-              el.dataset.originalTop = style.top === "auto" ? "0px" : style.top;
-            }
+      // document
+      //   .querySelectorAll("header, [role='banner'], .header, #header")
+      //   .forEach((el) => {
+      //     const style = getComputedStyle(el);
+      //     if (style.position === "fixed" || style.position === "sticky") {
+      //       if (!el.dataset.originalTop) {
+      //         el.dataset.originalTop = style.top === "auto" ? "0px" : style.top;
+      //       }
 
-            const base = parseFloat(el.dataset.originalTop) || 0;
-            el.style.top = base + offset + "px";
-          }
-        });
+      //       const base = parseFloat(el.dataset.originalTop) || 0;
+      //       el.style.top = base + offset + "px";
+      //     }
+      //   });
     };
     // 初回実行（表示直後）
     pushDown();
